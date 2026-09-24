@@ -1,0 +1,815 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI HR Recruitment Assistant</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <div class="brand-logo">HR</div>
+
+        <div>
+            <h2>TalentAI</h2>
+            <p>Recruitment Assistant</p>
+        </div>
+    </div>
+
+
+    <nav>
+
+        <p class="nav-heading">MAIN</p>
+
+        <button class="nav-item active" onclick="showSection('dashboard')">
+            <span>▦</span>
+            Dashboard
+        </button>
+
+        <button class="nav-item" onclick="showSection('candidates')">
+            <span>♙</span>
+            Candidates
+        </button>
+
+        <button class="nav-item" onclick="showSection('jobs')">
+            <span>▤</span>
+            Job Openings
+        </button>
+
+        <button class="nav-item" onclick="showSection('assistant')">
+            <span>✦</span>
+            AI Assistant
+        </button>
+
+
+        <p class="nav-heading">MANAGE</p>
+
+        <button class="nav-item">
+            <span>◷</span>
+            Interviews
+        </button>
+
+        <button class="nav-item">
+            <span>✓</span>
+            Shortlisted
+        </button>
+
+        <button class="nav-item">
+            <span>⚙</span>
+            Settings
+        </button>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="ai-status">
+            <span class="green-dot"></span>
+
+            <div>
+                <strong>AI Assistant</strong>
+                <small>Online & Ready</small>
+            </div>
+        </div>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <div>
+            <h1 id="pageTitle">Recruitment Dashboard</h1>
+            <p id="pageSubtitle">
+                AI-powered candidate management
+            </p>
+        </div>
+
+
+        <div class="top-actions">
+
+            <button class="icon-button">⌕</button>
+
+            <button class="icon-button notification">
+                ♢
+                <span></span>
+            </button>
+
+
+            <div class="profile">
+
+                <div class="profile-avatar">
+                    S
+                </div>
+
+                <div>
+                    <strong>Saswathi</strong>
+                    <small>HR Recruiter</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <section id="dashboard" class="section active-section">
+
+        <div class="welcome">
+
+            <div>
+                <h2>Good morning, Saswathi 👋</h2>
+
+                <p>
+                    Here's what's happening with your recruitment pipeline.
+                </p>
+            </div>
+
+
+            <button
+                class="primary-button"
+                onclick="openJobModal()"
+            >
+                + Create Job
+            </button>
+
+        </div>
+
+
+
+        <!-- STATISTICS -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    ♙
+                </div>
+
+                <div>
+                    <p>Total Candidates</p>
+                    <h2 id="candidateCount">248</h2>
+                    <small class="positive">
+                        ↑ 12% this month
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    ▤
+                </div>
+
+                <div>
+                    <p>Open Positions</p>
+                    <h2>12</h2>
+                    <small>4 urgent roles</small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    ✓
+                </div>
+
+                <div>
+                    <p>Shortlisted</p>
+                    <h2>36</h2>
+                    <small class="positive">
+                        ↑ 8% this week
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    ◷
+                </div>
+
+                <div>
+                    <p>Interviews</p>
+                    <h2>18</h2>
+                    <small>5 scheduled today</small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CONTENT GRID -->
+
+        <div class="dashboard-grid">
+
+
+            <!-- AI ASSISTANT -->
+
+            <div class="ai-card">
+
+                <div class="card-heading">
+
+                    <div class="ai-title">
+
+                        <div class="ai-icon">
+                            ✦
+                        </div>
+
+                        <div>
+                            <h3>AI Recruitment Assistant</h3>
+
+                            <p>
+                                Ask me anything about recruitment
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <span class="online">
+                        ● Online
+                    </span>
+
+                </div>
+
+
+                <div class="mini-chat" id="miniChat">
+
+                    <div class="ai-message">
+
+                        <div class="small-ai">
+                            AI
+                        </div>
+
+                        <div>
+                            Hello! I'm your AI Recruitment
+                            Assistant. How can I help you today?
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="chat-input">
+
+                    <input
+                        id="dashboardInput"
+                        type="text"
+                        placeholder="Ask about candidates, jobs..."
+                    >
+
+                    <button onclick="dashboardChat()">
+                        ➤
+                    </button>
+
+                </div>
+
+
+                <div class="suggestions">
+
+                    <button onclick="quickAsk('Find candidates for Java Developer')">
+                        Find candidates
+                    </button>
+
+                    <button onclick="quickAsk('Give me interview questions')">
+                        Interview questions
+                    </button>
+
+                    <button onclick="quickAsk('How should I shortlist candidates?')">
+                        Shortlisting help
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- JOB PIPELINE -->
+
+            <div class="pipeline-card">
+
+                <div class="card-heading">
+
+                    <div>
+                        <h3>Recruitment Pipeline</h3>
+                        <p>Current candidate status</p>
+                    </div>
+
+                    <button class="more">•••</button>
+
+                </div>
+
+
+                <div class="pipeline">
+
+                    <div class="pipeline-row">
+
+                        <span>Applications</span>
+
+                        <div class="progress">
+                            <div style="width:90%"></div>
+                        </div>
+
+                        <strong>248</strong>
+
+                    </div>
+
+
+                    <div class="pipeline-row">
+
+                        <span>AI Screened</span>
+
+                        <div class="progress">
+                            <div style="width:72%"></div>
+                        </div>
+
+                        <strong>178</strong>
+
+                    </div>
+
+
+                    <div class="pipeline-row">
+
+                        <span>Shortlisted</span>
+
+                        <div class="progress">
+                            <div style="width:40%"></div>
+                        </div>
+
+                        <strong>36</strong>
+
+                    </div>
+
+
+                    <div class="pipeline-row">
+
+                        <span>Interview</span>
+
+                        <div class="progress">
+                            <div style="width:25%"></div>
+                        </div>
+
+                        <strong>18</strong>
+
+                    </div>
+
+
+                    <div class="pipeline-row">
+
+                        <span>Selected</span>
+
+                        <div class="progress">
+                            <div style="width:12%"></div>
+                        </div>
+
+                        <strong>7</strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RECENT CANDIDATES -->
+
+        <div class="table-card">
+
+            <div class="table-header">
+
+                <div>
+                    <h3>Recent Candidates</h3>
+                    <p>AI-screened candidates</p>
+                </div>
+
+                <button
+                    class="view-button"
+                    onclick="showSection('candidates')"
+                >
+                    View All →
+                </button>
+
+            </div>
+
+
+            <div class="candidate-table">
+
+                <div class="table-row table-head">
+
+                    <span>Candidate</span>
+                    <span>Role</span>
+                    <span>AI Match</span>
+                    <span>Experience</span>
+                    <span>Status</span>
+
+                </div>
+
+
+                <div class="table-row">
+
+                    <span class="candidate-name">
+                        <b>AK</b>
+                        Arun Kumar
+                    </span>
+
+                    <span>Java Developer</span>
+
+                    <span class="match">94%</span>
+
+                    <span>3 Years</span>
+
+                    <span class="badge shortlisted">
+                        Shortlisted
+                    </span>
+
+                </div>
+
+
+                <div class="table-row">
+
+                    <span class="candidate-name">
+                        <b>PM</b>
+                        Priya Menon
+                    </span>
+
+                    <span>Cloud Engineer</span>
+
+                    <span class="match">91%</span>
+
+                    <span>2 Years</span>
+
+                    <span class="badge review">
+                        Under Review
+                    </span>
+
+                </div>
+
+
+                <div class="table-row">
+
+                    <span class="candidate-name">
+                        <b>RS</b>
+                        Rahul Sharma
+                    </span>
+
+                    <span>Data Analyst</span>
+
+                    <span class="match">87%</span>
+
+                    <span>2 Years</span>
+
+                    <span class="badge interview">
+                        Interview
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= CANDIDATES ================= -->
+
+    <section id="candidates" class="section">
+
+        <div class="section-title">
+
+            <div>
+                <h2>Candidate Management</h2>
+                <p>Search and analyse candidates using AI</p>
+            </div>
+
+            <button
+                class="primary-button"
+                onclick="document.getElementById('resumeInput').click()"
+            >
+                + Upload Resume
+            </button>
+
+            <input
+                type="file"
+                id="resumeInput"
+                accept=".pdf,.doc,.docx"
+                hidden
+                onchange="resumeUploaded()"
+            >
+
+        </div>
+
+
+        <div class="search-box">
+
+            <input
+                id="candidateSearch"
+                type="text"
+                placeholder="Search candidate, role or skill..."
+                onkeyup="searchCandidates()"
+            >
+
+            <button>Search</button>
+
+        </div>
+
+
+        <div class="candidate-grid" id="candidateGrid">
+
+            <!-- Candidate cards generated by JS -->
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= JOBS ================= -->
+
+    <section id="jobs" class="section">
+
+        <div class="section-title">
+
+            <div>
+                <h2>Job Openings</h2>
+                <p>Manage your current recruitment requirements</p>
+            </div>
+
+            <button
+                class="primary-button"
+                onclick="openJobModal()"
+            >
+                + Create Job
+            </button>
+
+        </div>
+
+
+        <div class="job-grid">
+
+            <div class="job-card">
+
+                <div class="job-top">
+                    <span class="job-type">FULL TIME</span>
+                    <span>•••</span>
+                </div>
+
+                <h3>Cloud Engineer</h3>
+
+                <p>☁ AWS • Linux • Networking</p>
+
+                <div class="job-info">
+                    <span>12 Applicants</span>
+                    <span>2 Positions</span>
+                </div>
+
+                <button onclick="showSection('candidates')">
+                    View Candidates →
+                </button>
+
+            </div>
+
+
+            <div class="job-card">
+
+                <div class="job-top">
+                    <span class="job-type">FULL TIME</span>
+                    <span>•••</span>
+                </div>
+
+                <h3>Java Developer</h3>
+
+                <p>☕ Java • Spring Boot • SQL</p>
+
+                <div class="job-info">
+                    <span>28 Applicants</span>
+                    <span>3 Positions</span>
+                </div>
+
+                <button onclick="showSection('candidates')">
+                    View Candidates →
+                </button>
+
+            </div>
+
+
+            <div class="job-card">
+
+                <div class="job-top">
+                    <span class="job-type">HYBRID</span>
+                    <span>•••</span>
+                </div>
+
+                <h3>Data Analyst</h3>
+
+                <p>📊 Python • SQL • Power BI</p>
+
+                <div class="job-info">
+                    <span>19 Applicants</span>
+                    <span>1 Position</span>
+                </div>
+
+                <button onclick="showSection('candidates')">
+                    View Candidates →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= AI ASSISTANT ================= -->
+
+    <section id="assistant" class="section">
+
+        <div class="assistant-page">
+
+            <div class="assistant-header">
+
+                <div class="large-ai-icon">
+                    ✦
+                </div>
+
+                <div>
+                    <h2>AI Recruitment Assistant</h2>
+
+                    <p>
+                        Your intelligent HR recruitment companion
+                    </p>
+                </div>
+
+                <span class="online">
+                    ● AI Online
+                </span>
+
+            </div>
+
+
+            <div class="full-chat" id="fullChat">
+
+                <div class="full-ai-message">
+
+                    <div class="large-avatar">
+                        AI
+                    </div>
+
+                    <div class="full-bubble">
+
+                        <strong>AI Recruitment Assistant</strong>
+
+                        <p>
+                            Hello! I can assist you with recruitment
+                            tasks such as candidate screening,
+                            job descriptions and interview preparation.
+                        </p>
+
+                        <div class="ai-actions">
+
+                            <button onclick="askFull('Create interview questions for a Cloud Engineer')">
+                                Interview Questions
+                            </button>
+
+                            <button onclick="askFull('Help me screen a candidate')">
+                                Screen Candidate
+                            </button>
+
+                            <button onclick="askFull('Create a job description')">
+                                Job Description
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="full-input">
+
+                <input
+                    id="fullInput"
+                    type="text"
+                    placeholder="Ask your recruitment question..."
+                >
+
+                <button onclick="fullChatSend()">
+                    Send
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- ================= JOB MODAL ================= -->
+
+<div id="jobModal" class="modal">
+
+    <div class="modal-box">
+
+        <button
+            class="close"
+            onclick="closeJobModal()"
+        >
+            ×
+        </button>
+
+        <h2>Create Job Opening</h2>
+
+        <p>Add a new recruitment requirement</p>
+
+
+        <label>Job Title</label>
+
+        <input
+            id="jobTitle"
+            type="text"
+            placeholder="Example: AWS Cloud Engineer"
+        >
+
+
+        <label>Required Skills</label>
+
+        <input
+            id="jobSkills"
+            type="text"
+            placeholder="AWS, Linux, Networking"
+        >
+
+
+        <label>Positions</label>
+
+        <input
+            id="jobPositions"
+            type="number"
+            min="1"
+            value="1"
+        >
+
+
+        <button
+            class="primary-button full-button"
+            onclick="createJob()"
+        >
+            Create Job
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
+```
